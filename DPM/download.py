@@ -1,10 +1,10 @@
 # use PYTHON 3
-#Script to download from web,
+#Script to query web pages at Uniprot and Pfam and download the relevant data
 #No proxy handling
 
 import urllib.request
 import shutil
-
+import uniprot
 
 # Download the file from `url` and save it locally under `file_name`:
 for i in range(30):
