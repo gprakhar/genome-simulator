@@ -6,6 +6,7 @@
 import argparse
 import csv
 import requests
+import shutil
 
 #parse arguments and create usage text
 parser = argparse.ArgumentParser()
@@ -23,20 +24,24 @@ with open(inputfileName) as inputfileHandle:
 #Query the Uniprot databse with URL encode queries, one by one from the list of keywords
 ##URL demo: http://www.uniprot.org/uniprot/?query=gene:wnt AND reviewed:yes AND organism:"Homo sapiens (Human) [9606]"&sort=score&columns=id,entry name,protein names,genes(PREFERRED),organism,length,database(Pfam)
 
-uniprotURL =  r'http://www.uniprot.org/uniprot/query'
-uniprotPayload = {'query':'gene:$'
+#download-->#http://www.uniprot.org/uniprot/?sort=score&desc=&compress=yes&query=gene:wnt%20AND%20reviewed:yes%20AND%20organism:%22Homo%20sapiens%20(Human)%20[9606]%22&fil=&format=fasta&force=yes
+uniprotDlURL = 'http://www.uniprot.org/uniprot/?sort=score&desc=&compress=yes&query=gene:wnt%20AND%20reviewed:yes%20AND%20organism:%22Homo%20sapiens%20(Human)%20[9606]%22&fil=&format=fasta&force=yes'
+
+#1column-query#download it- gunziped #http://www.uniprot.org/uniprot/?sort=&desc=&compress=yes&query=family:%22wnt%20family%22&fil=organism:%22Homo%20sapiens%20(Human)%20[9606]%22%20AND%20reviewed:yes&format=tab&force=yes&columns=id
+uniprotQURL = 'http://www.uniprot.org/uniprot/?sort=&desc=&compress=yes&query=family:%22wnt%20family%22&fil=organism:%22Homo%20sapiens%20(Human)%20[9606]%22%20AND%20reviewed:yes&format=tab&force=yes&columns=id'
+#uniprotPayload = {'gene': 'wnt', 'reviewed': 'yes', 'organism': '"Homo sapiens (Human) [9606]"', 'sort': 'score', 'columns[]': ['id', 'entry name', 'protein names', 'genes(PREFERRED)', 'organism', 'length', 'database(Pfam)']}
+
+#r = requests.get(uniprotQURL)
+#print r.encoding
+#print r.text
 
 
-'''
-import urllib.request
-import shutil
-import uniprot
 
-# Download the file from `url` and save it locally under `file_name`:
-for i in range(30):
-  url = 'http://www.nios.ac.in/media/documents/secscicour/English/Chapter-{0}.pdf'.format(i)
-  filename = 'nios_science-technology_chapter{0}.pdf'.format(i)
-  print (filename)
-  with urllib.request.urlopen(url) as response, open(filename, 'wb') as out_file:
-    shutil.copyfileobj(response, out_file)
-'''
+##to Download a fasta or similar file
+r = requests.get(uniprotQURL, stream=True)
+if r.status_code == 200:
+	print r.status_code
+	with open("reply.list.gz", 'wb') as fileHandle:
+	        r.raw.decode_content = True
+        	shutil.copyfileobj(r.raw, fileHandle) 
+
