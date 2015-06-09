@@ -60,3 +60,5 @@ target/
 DPM/virtenv/*
 DPM/virtenv_py2/*
 *.csv
+*.gz
+*.pyc
