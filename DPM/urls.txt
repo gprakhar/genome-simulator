@@ -1,7 +1,0 @@
-##File has URL for Uniprot and Pfam
-
-##Uniprot ver 1
-##http://www.uniprot.org/uniprot/?query=gene:wnt AND reviewed:yes AND organism:"Homo sapiens (Human) [9606]"&sort=score&columns=id,entry name,protein names,genes(PREFERRED),organism,length,database(Pfam)
-
-##Pfam ver 1
-##http://pfam.xfam.org/family/PF00110/hmm

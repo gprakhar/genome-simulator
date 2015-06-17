@@ -64,3 +64,5 @@ DPM/virtenv_py2/*
 *.pyc
 *.swp
 *.fa
+*.xml
+*.txt
