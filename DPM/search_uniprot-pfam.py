@@ -16,15 +16,15 @@ inputfileName = args.keywordfileName
 
 #Proxy settings
 
-http_proxy = "http://proxy.ibab.ac.in:3128/"
-https_proxy = "http://proxy.ibab.ac.in:3128/"
-ftp_proxy = "http://proxy.ibab.ac.in:3128/"
+#http_proxy = "http://proxy.ibab.ac.in:3128/"
+#https_proxy = "http://proxy.ibab.ac.in:3128/"
+#ftp_proxy = "http://proxy.ibab.ac.in:3128/"
 
-proxyDict = { 
-              "http"  : http_proxy, 
-              "https" : https_proxy, 
-              "ftp"   : ftp_proxy
-            }
+#proxyDict = { 
+#              "http"  : http_proxy, 
+#              "https" : https_proxy, 
+#              "ftp"   : ftp_proxy
+#            }
 
 #Read input file with csv module and store it as list
 #Line change means new entry
