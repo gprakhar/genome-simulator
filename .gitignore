@@ -67,3 +67,4 @@ DPM/virtenv_py2/*
 *.xml
 *.txt
 *.hmm
+*.tar

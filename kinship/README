@@ -1,6 +1,6 @@
 Kinship Estimator
 
-In this project we would like to write a code that can tell the frequency distribution of coefficient of relateness.
+In this project we would like to write a code that can tell the frequency distribution of coefficient of relateness for all progeny(s)
 
 The input would be:
 1. number of Chromosomes
