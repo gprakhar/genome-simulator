@@ -68,3 +68,5 @@ DPM/virtenv_py2/*
 *.txt
 *.hmm
 *.tar
+.RData
+.Rhistory

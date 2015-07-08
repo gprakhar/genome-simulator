@@ -7,7 +7,7 @@ import argparse
 
 #argument parsing
 parser = argparse.ArgumentParser()
-parser.add_argument('lenghtofGenome', metavar='L', default='3400000', help='sequence lenght of the simulated genome in nucleotides, in base pairs (b.p.), default 3400000 b.p.', type=int)
+parser.add_argument('lenghtofGenome', metavar='L', default='3400000', help='sequence lenght of the simulated genome in nucleotides, in base pairs (b.p.), default 3400000 b.p.', type=double)
 parser.add_argument('-f', '--condonusageTable', help='text file with two columns, Col1 - Codon name, Col2 = Frequency of Codon per thousand, tab seprated, one codon entry per row', type=str)
 args = parser.parse_args()
 
