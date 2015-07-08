@@ -9,7 +9,7 @@ probVal = read.table("probability-values-codon-usage.txt", header=FALSE)[,1]
 codon = read.table("codon-list.txt", header=FALSE, stringsAsFactors=FALSE)[,1]
 
 #The sample() to generate the sequence, the function gives out one codon which means number of Seq length = nucleotides/3
-dictyGenome <-sample(codon,1000000,replace=TRUE, probVal)
+dictyGenome <-sample(codon,1133333,replace=TRUE, probVal)
 
 #Generate ad save frequency plot of Codons
 #png("Condon-usage-freq-plot.png")
