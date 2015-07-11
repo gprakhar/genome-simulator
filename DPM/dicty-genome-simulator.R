@@ -2,14 +2,22 @@
 #author : Prakhar Gaur
 #Date : July 8 IST 2015
 
+args <- commandArgs(trailingOnly = TRUE)
+
+if(length(args) < 4)
+{
+  stop("Usage: Rscript dicty-genome-simulator.R <Probability score file> <Codon name file> <Number of Codons> <iteration count>")
+}
+
 #Read data from File, probability values
-probVal = read.table("probability-values-codon-usage.txt", header=FALSE)[,1]
+probVal = read.table(args[1], header=FALSE)[,1]
 
 #Read data from file, list of Codons (use stringsAsFactors=FALSE, otherwise codons are considered as Factors)
-codon = read.table("codon-list.txt", header=FALSE, stringsAsFactors=FALSE)[,1]
+codon = read.table(args[2], header=FALSE, stringsAsFactors=FALSE)[,1]
 
-#The sample() to generate the sequence, the function gives out one codon which means number of Seq length = nucleotides/3
-dictyGenome <-sample(codon,1133333,replace=TRUE, probVal)
+#The sample() to generate the sequence, the function gives out codons which means number of Seq length = nucleotides/3, genome size
+numberofCodons = as.numeric(args[3])
+dictyGenome <-sample(codon,numberofCodons,replace=TRUE, probVal)
 
 #Generate ad save frequency plot of Codons
 #png("Condon-usage-freq-plot.png")
@@ -17,11 +25,13 @@ dictyGenome <-sample(codon,1133333,replace=TRUE, probVal)
 #dev.off()
 
 #create string with fasta header
-head <- c('>dictyGenome')
+iterationFlag = as.numeric(args[4])
+head = sprintf(">dictySynGenome-%d", iterationFlag)
 
 # Add fasta header to fasta file
-write(head, "dicty-Synthetic-genome.fa")
+genomeFilename = sprintf("dicty-Synthetic-genome_%d.fa", iterationFlag)
+write(head, genomeFilename)
 
 #Append sequence to fasta file
-write.table(paste(dictyGenome,collapse=""), "dicty-Synthetic-genome.fa", append=TRUE, col.name=FALSE, row.name=FALSE, quote=FALSE)
+write.table(paste(dictyGenome,collapse=""), genomeFilename, append=TRUE, col.name=FALSE, row.name=FALSE, quote=FALSE)
 
