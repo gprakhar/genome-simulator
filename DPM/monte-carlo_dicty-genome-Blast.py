@@ -7,13 +7,14 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('numberofiterations', metavar='N', help='Number of times ti run the Monte carlo simulation', type=int)
+parser.add_argument('numberofcores', metavar='C', help='Number of cores on machine, default=12', default=12, type=int)
 
 args = parser.parse_args()
 lenght = args.numberofiterations
+cores = args.numberofcores
 
 #blast binary folder
 blastExe = r'/home/littleboy/local_bin/ncbi-blast-2.2.30+/bin/'
-
 
 for i in range(lenght):
 	#generate cmd string for Genome Simulator
@@ -36,5 +37,5 @@ for i in range(lenght):
 	os.system(genSynGenome_blastDB)
 
 	#run blast on the Db created in previous step with DPM protien homologs from humans
-	blastcmd = '%stblastn -query DPM-prot.fa -db dicty-Synthetic-genome_%d -out dictySynGenome-blast-out_%d.xml -outfmt 5 -num_threads 23' % (blastExe, i, i)
-
+	blastcmd = '%stblastn -query DPM-prot.fa -db dicty-Synthetic-genome_%d -out dictySynGenome-blast-out_%d.xml -outfmt 5 -num_threads %d' % (blastExe, i, i, cores)
+	os.system(blastcmd)
