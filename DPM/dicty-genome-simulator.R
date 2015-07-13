@@ -29,7 +29,7 @@ iterationFlag = as.numeric(args[4])
 head = sprintf(">dictySynGenome-%d", iterationFlag)
 
 # Add fasta header to fasta file
-genomeFilename = sprintf("dicty-Synthetic-genome_%d.fa", iterationFlag)
+genomeFilename = sprintf("dicty-Synthetic-genomeU_%d.fa", iterationFlag)
 write(head, genomeFilename)
 
 #Append sequence to fasta file
