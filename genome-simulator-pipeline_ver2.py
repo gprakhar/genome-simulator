@@ -1,24 +1,25 @@
-#script to use Monte Carlo approach on Blast with synthetic genome sequence as databse and DPM protien Human homologs as query
+#script to work as the pipeline for running the 
 #Author : prakhar gaur
-#date : Wed 8 July IST 2015
+#date : Tue 21 July IST 2015
 
 import os
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('numberofiterations', metavar='N', help='Number of times ti run the Monte carlo simulation', type=int)
-parser.add_argument('numberofcores', metavar='C', help='Number of cores on machine, default=12', default=12, type=int)
+parser.add_argument('numberofiterations', metavar='N', help='Number of times to run the Monte carlo simulation', type=int)
+parser.add_argument('codonfreqfile', metavar='C', help='text file with two columns, Col1 - Codon name, Col2 = Frequency of Codon per thousand, tab seprated, one codon entry per row')
 
 args = parser.parse_args()
 lenght = args.numberofiterations
-cores = args.numberofcores
-
-#blast binary folder
-blastExe = r'/home/littleboy/local_bin/ncbi-blast-2.2.30+/bin/'
+codonFreqFile = str(args.codonfreqfile)
 
 for i in range(lenght):
-	#generate cmd string for Genome Simulator
-	genSynGenome = 'Rscript dicty-genome-simulator.R probability-values-codon-usage.txt codon-list.txt 11333333 %d' % i
+	#run parsing script to read frequency values and write them as Codon usage probability to seprate file 
+	parseCodonFreqFile = 'python dicty-codon-usage-file_parser.py -f %s' % codonFreqFile
+	os.system(parseCodonFreqFile)
+	
+	#Run the R script to generate the simulated gneome, using a sample() with replace
+	genSynGenome = 'Rscript dicty-genome-simulator.R probability-values-codon-usage.txt codon-list.txt 11333333 %d' % i #generate cmd string for Genome Simulator
 	os.system(genSynGenome)
 
 	#replace 'U' in synthetic genome fasta file with 'T'
@@ -26,16 +27,3 @@ for i in range(lenght):
     		for line in infile:
 			line = line.replace('U', 'T')
 			outfile.write(line)
-
-	#delete Synthetic genome file with Uracil
-	deleteUfile = 'rm dicty-Synthetic-genomeU_%d.fa' % i
-	os.system(deleteUfile)
-	
-	#generate blast database from Synthetic genome created in previous step
-	genSynGenome_blastDB = '%smakeblastdb -in dicty-Synthetic-genome_%d.fa -parse_seqids -dbtype nucl -out dicty-Synthetic-genome_%d' % (blastExe, i, i)
-	print genSynGenome_blastDB
-	os.system(genSynGenome_blastDB)
-
-	#run blast on the Db created in previous step with DPM protien homologs from humans
-	blastcmd = '%stblastn -query DPM-prot.fa -db dicty-Synthetic-genome_%d -out dictySynGenome-blast-out_%d.xml -outfmt 5 -num_threads %d' % (blastExe, i, i, cores)
-	os.system(blastcmd)

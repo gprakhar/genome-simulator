@@ -19,11 +19,6 @@ codon = read.table(args[2], header=FALSE, stringsAsFactors=FALSE)[,1]
 numberofCodons = as.numeric(args[3])
 dictyGenome <-sample(codon,numberofCodons,replace=TRUE, probVal)
 
-#Generate ad save frequency plot of Codons
-#png("Condon-usage-freq-plot.png")
-#plot(dictyGenome)
-#dev.off()
-
 #create string with fasta header
 iterationFlag = as.numeric(args[4])
 head = sprintf(">dictySynGenome-%d", iterationFlag)

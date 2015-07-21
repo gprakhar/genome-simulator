@@ -14,18 +14,14 @@ frequencyFile = args.condonusageTable
 
 freqDict = {}
 
+#read input file into a Dictionery as Key Value pairs for each Codon
 with open(frequencyFile, 'r') as inputFilehandle:
 	for line in inputFilehandle:
 		(key,value) = line.split()
-		freqDict[key] = float(value)/1000
-		
-#print freqDict
+		freqDict[key] = float(value)/1000 #convert the Frequency value to a probability value
 
+#Write the Probability and Condon to two seperate files
 with open("codon-list.txt", "w") as out1, open("probability-values-codon-usage.txt", "w") as out2:
 	for (k,v) in freqDict.items():
 		out1.write("%s\n" % k)
 		out2.write("%s\n" % str(v))
-
-
-
-	
