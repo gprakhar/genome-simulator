@@ -1,6 +1,6 @@
-#Script to do the R part of Dicty genome simulation
+#Script to generate random genome sequence according to Nucleotide content data from D. dicoideum genome
 #author : Prakhar Gaur
-#Date : July 8 IST 2015
+#Date : August 8 IST 2015
 
 args <- commandArgs(trailingOnly = TRUE)
 
@@ -9,15 +9,15 @@ if(length(args) < 4)
   stop("Usage: Rscript dicty-genome-simulator.R <Probability score file> <Codon name file> <Number of Codons> <iteration count>")
 }
 
-#Read data from File, probability values
+#Read Nucleotide content data from file, probability values
 probVal = read.table(args[1], header=FALSE)[,1]
 
-#Read data from file, list of Codons (use stringsAsFactors=FALSE, otherwise codons are considered as Factors)
+#Read data from file, list of Nucleotides (A,T,G,C) (use stringsAsFactors=FALSE, otherwise codons are considered as Factors)
 codon = read.table(args[2], header=FALSE, stringsAsFactors=FALSE)[,1]
 
 #The sample() to generate the sequence, the function gives out codons which means number of Seq length = nucleotides/3, genome size
-numberofCodons = as.numeric(args[3])
-dictyGenome <-sample(codon,numberofCodons,replace=TRUE, probVal)
+numberofNulc = as.numeric(args[3])
+dictyGenome <-sample(codon,numberofNulc,replace=TRUE, probVal)
 
 #create string with fasta header
 iterationFlag = as.numeric(args[4])
