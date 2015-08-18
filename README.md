@@ -8,8 +8,7 @@ It uses the random.shuffle function, which works by making a list of the genome
 and then shuffling it.
 
 
-###########################################################
-Old version below, ver-2
+####Old version below, ver-2
 
 Beta version of the genome simulator
 Author : Prakhar Gaur
@@ -24,7 +23,7 @@ Features:
 
 
 
-Old version below , ver-1
+####Old version below , ver-1
 
 Code base for Genome simulator
 This pipeline has been written in R and Python.
