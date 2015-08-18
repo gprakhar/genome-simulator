@@ -1,4 +1,16 @@
 # CHG-projects
+
+##Author : Prakhar Gaur
+##Date : 18 Aug 2015
+
+Genome simulation can be done in  a jiffy with Biopython
+It uses the random.shuffle function, which works by making a list of the genome
+and then shuffling it.
+
+
+###########################################################
+##Old version below, ver-2
+
 ## Beta version of the genome simulator
 ##Author : Prakhar Gaur
 ##Date : 21 July 2015
@@ -12,7 +24,7 @@ Features:
 
 
 
-##Old version below
+##Old version below , ver-1
 
 Code base for Genome simulator
 This pipeline has been written in R and Python.
