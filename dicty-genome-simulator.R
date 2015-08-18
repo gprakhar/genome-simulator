@@ -15,7 +15,7 @@ probVal = read.table(args[1], header=FALSE)[,1]
 #Read data from file, list of Nucleotides (A,T,G,C) (use stringsAsFactors=FALSE, otherwise nucleotides are considered as Factors)
 nulc = read.table(args[2], header=FALSE, stringsAsFactors=FALSE)[,1]
 
-#The sample() to generate the sequence, the function gives out codons which means number of Seq length = nucleotides/3, genome size
+#The sample() to generate the sequence, the function gives out nucleotides
 numberofNulc = as.numeric(args[3])
 dictyGenome <-sample(nulc,numberofNulc,replace=TRUE, probVal)
 
