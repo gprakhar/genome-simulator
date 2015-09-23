@@ -5,12 +5,9 @@
 
 The pipeline is to be re-designed. 
 Features:
-1. 
-2. the code will generate ***random*** nucleotide sequence based on the nucleotide content of the D. discoideum genome
-		size (S) should be, S = Gs (genome size) - Gg (Gene content)
-2. Generate according to the Dictybase gff, simulated genes of size, the Codon usage table to be used here
-
-3. Insert the simulated genes at locations as per Dictybase gff file
+**A.** The code will generate ***random*** nucleotide sequence based on the nucleotide content of the D. discoideum genome.		size (S) should be, S = Gs (genome size) - Gg (Gene content)
+**B.** Generate according to the Dictybase gff, simulated genes of size, the Codon usage table to be used here
+**C.** Insert the simulated genes at locations as per Dictybase gff file
 
 
 
